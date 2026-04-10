@@ -1,8 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Autoplay, Pagination } from "swiper/modules"
 import { useNavigate } from "react-router-dom"
-import "swiper/css"
-import "swiper/css/pagination"
 
 const slides = [
   {

@@ -7,7 +7,6 @@ import { addToCart } from "../../store/cartSlice"
 import { products as allProducts } from "../../data/products"
 import type { Product } from "../../types/product"
 
-import "swiper/css"
 
 // Use featured products first, fall back to top-rated
 const getDisplayProducts = (): Product[] => {
