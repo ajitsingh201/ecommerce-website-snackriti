@@ -17,6 +17,12 @@ import CheckoutPage from "../pages/Checkout/CheckoutPage"
 import LoginPage from "../pages/Auth/LoginPage"
 import SignupPage from "../pages/Auth/SignupPage"
 
+// Makhana dedicated pages
+import PaperBoxPage from "../pages/Makhana/PaperBoxPage"
+import StandyPouchPage from "../pages/Makhana/StandyPouchPage"
+import StandyPouch30gPage from "../pages/Makhana/StandyPouch30gPage"
+import GiftHampersPage from "../pages/GiftHampers/GiftHampersPage"
+
 // Company
 import AboutPage from "../pages/Company/AboutPage"
 import WhyUsPage from "../pages/Company/WhyUsPage"
@@ -39,6 +45,12 @@ const AppRoutes = () => (
         <Route path="/products" element={<AllProductsPage />} />
         <Route path="/category/:slug" element={<CategoryPage />} />
         <Route path="/product/:slug" element={<ProductPage />} />
+
+        {/* Makhana dedicated pages */}
+        <Route path="/makhana/paper-box" element={<PaperBoxPage />} />
+        <Route path="/makhana/standy-pouch" element={<StandyPouchPage />} />
+        <Route path="/makhana/standy-30g" element={<StandyPouch30gPage />} />
+        <Route path="/gift-hampers" element={<GiftHampersPage />} />
 
         {/* Cart & Checkout */}
         <Route path="/cart" element={<CartPage />} />

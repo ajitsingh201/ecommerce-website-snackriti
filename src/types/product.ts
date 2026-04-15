@@ -9,11 +9,14 @@ export interface Product {
   packaging: string
   images: string[]
   description: string
+  highlights?: string[]
+  ingredients?: string
   keywords: string[]
   rating: number
   reviewCount: number
   inStock: boolean
   featured?: boolean
+  newArrival?: boolean
 }
 
 export interface CartItem {

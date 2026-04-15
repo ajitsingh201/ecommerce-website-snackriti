@@ -7,24 +7,29 @@ import { addToCart } from "../../store/cartSlice"
 import { products as allProducts } from "../../data/products"
 import type { Product } from "../../types/product"
 
-
-// Use featured products first, fall back to top-rated
-const getDisplayProducts = (): Product[] => {
+const getFeaturedProducts = (): Product[] => {
   const featured = allProducts.filter(p => p.featured)
   if (featured.length >= 6) return featured.slice(0, 8)
   const extras = allProducts.filter(p => !p.featured).slice(0, 8 - featured.length)
   return [...featured, ...extras]
 }
 
-const displayProducts = getDisplayProducts()
+const getNewArrivalProducts = (): Product[] => {
+  const newArrivals = allProducts.filter(p => p.newArrival)
+  if (newArrivals.length >= 6) return newArrivals
+  return newArrivals
+}
 
 interface Props {
   title?: string
+  filterBy?: "featured" | "newArrival"
 }
 
-const ProductSlider = ({ title = "Popular Products" }: Props) => {
+const ProductSlider = ({ title = "Popular Products", filterBy = "featured" }: Props) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  const displayProducts = filterBy === "newArrival" ? getNewArrivalProducts() : getFeaturedProducts()
 
   const handleAddToCart = (e: React.MouseEvent, product: Product) => {
     e.stopPropagation()
@@ -38,10 +43,17 @@ const ProductSlider = ({ title = "Popular Products" }: Props) => {
 
         {/* Header */}
         <div className="flex justify-between items-center mb-10 md:mb-14">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">{title}</h2>
+          <div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">{title}</h2>
+            {filterBy === "newArrival" && (
+              <p className="text-gray-500 text-sm mt-1">
+                14 new flavors · 30g Standy Pouch · ₹75 each
+              </p>
+            )}
+          </div>
           <button
-            onClick={() => navigate("/products")}
-            className="text-orange-600 font-semibold hover:underline"
+            onClick={() => navigate(filterBy === "newArrival" ? "/makhana/standy-30g" : "/products")}
+            className="text-orange-600 font-semibold hover:underline text-sm"
           >
             View All →
           </button>
@@ -49,7 +61,7 @@ const ProductSlider = ({ title = "Popular Products" }: Props) => {
 
         <Swiper
           modules={[Autoplay, Pagination]}
-          loop={true}
+          loop={displayProducts.length > 4}
           speed={900}
           autoplay={{
             delay: 2500,
@@ -57,11 +69,12 @@ const ProductSlider = ({ title = "Popular Products" }: Props) => {
             pauseOnMouseEnter: true,
           }}
           pagination={{ clickable: true }}
-          spaceBetween={30}
+          spaceBetween={20}
           breakpoints={{
-            320: { slidesPerView: 1 },
-            480: { slidesPerView: 2 },
-            768: { slidesPerView: 3 },
+            320: { slidesPerView: 1.5 },
+            480: { slidesPerView: 2.2 },
+            640: { slidesPerView: 3 },
+            768: { slidesPerView: 3.5 },
             1024: { slidesPerView: 4 },
             1280: { slidesPerView: 5 },
           }}
@@ -75,21 +88,25 @@ const ProductSlider = ({ title = "Popular Products" }: Props) => {
             return (
               <SwiperSlide key={product.id}>
                 <div
-                  className="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl
-                    transition duration-500 cursor-pointer pb-4"
+                  className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl
+                    transition-all duration-400 cursor-pointer border border-gray-100"
                   onClick={() => navigate(`/product/${product.slug}`)}
                 >
                   {/* Image */}
-                  <div className="relative aspect-square overflow-hidden">
+                  <div className="relative aspect-square overflow-hidden bg-gray-50">
                     <img
                       src={product.images[0]}
                       alt={product.name}
-                      className="w-full h-full object-cover transition duration-700 ease-in-out group-hover:scale-110"
+                      className="w-full h-full object-cover transition duration-600 ease-in-out group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition duration-500" />
                     {discountPercent > 0 && (
-                      <span className="absolute top-3 left-3 bg-orange-600 text-white text-xs px-3 py-1 rounded-full shadow-md">
-                        {discountPercent}% OFF
+                      <span className="absolute top-2.5 left-2.5 bg-orange-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow">
+                        -{discountPercent}%
+                      </span>
+                    )}
+                    {product.newArrival && (
+                      <span className="absolute top-2.5 right-2.5 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow">
+                        New
                       </span>
                     )}
                     {!product.inStock && (
@@ -102,29 +119,30 @@ const ProductSlider = ({ title = "Popular Products" }: Props) => {
                   </div>
 
                   {/* Content */}
-                  <div className="p-4">
-                    <h3 className="font-semibold text-sm sm:text-base line-clamp-1">{product.name}</h3>
-                    <p className="text-gray-500 text-xs sm:text-sm mt-1 line-clamp-1">{product.category}</p>
+                  <div className="p-3.5">
+                    <span className="text-[10px] font-bold bg-orange-50 text-orange-600 border border-orange-100 px-2 py-0.5 rounded-full">
+                      {product.packaging}
+                    </span>
+                    <h3 className="font-semibold text-sm line-clamp-1 mt-1.5 group-hover:text-orange-600 transition-colors">
+                      {product.name}
+                    </h3>
 
-                    {/* Pricing */}
-                    <div className="mt-3 flex items-center gap-2">
-                      {product.discountedPrice && (
-                        <span className="text-gray-400 line-through text-sm">₹{product.price}</span>
-                      )}
-                      <span className="text-orange-600 font-bold text-lg">₹{salePrice}</span>
+                    {/* Pricing + Cart */}
+                    <div className="mt-3 flex items-center justify-between">
+                      <div className="flex items-baseline gap-1.5">
+                        {product.discountedPrice && (
+                          <span className="text-gray-400 line-through text-xs">₹{product.price}</span>
+                        )}
+                        <span className="text-orange-600 font-extrabold text-base">₹{salePrice}</span>
+                      </div>
+                      <button
+                        onClick={(e) => handleAddToCart(e, product)}
+                        disabled={!product.inStock}
+                        className="w-8 h-8 flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white rounded-full transition-all active:scale-90 disabled:opacity-40 shadow-sm"
+                      >
+                        <FiShoppingCart size={13} />
+                      </button>
                     </div>
-
-                    {/* Add to Cart */}
-                    <button
-                      onClick={(e) => handleAddToCart(e, product)}
-                      disabled={!product.inStock}
-                      className="mt-4 w-full flex items-center justify-center gap-2 bg-orange-600 text-white
-                        py-2.5 rounded-lg hover:bg-orange-700 transition duration-300 font-medium text-sm
-                        active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      <FiShoppingCart size={16} />
-                      {product.inStock ? "Add to Cart" : "Out of Stock"}
-                    </button>
                   </div>
                 </div>
               </SwiperSlide>

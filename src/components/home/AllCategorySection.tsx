@@ -1,165 +1,108 @@
+import { useNavigate } from "react-router-dom"
 
-interface Category {
-  name: string
-  image: string
-}
-
-const categories: Category[] = [
+const ranges = [
   {
-    name: "Paan Corner",
-    image: "https://cdn-icons-png.flaticon.com/512/3075/3075977.png",
+    icon: "📦",
+    name: "Paper Box",
+    desc: "30g · ₹75 each",
+    href: "/makhana/paper-box",
+    bg: "bg-blue-50",
+    iconBg: "bg-blue-100",
+    accent: "text-blue-700",
   },
   {
-    name: "Dairy, Bread & Eggs",
-    image: "https://cdn-icons-png.flaticon.com/512/3082/3082011.png",
+    icon: "🎒",
+    name: "Standy Pouch",
+    desc: "50g · ₹120 each",
+    href: "/makhana/standy-pouch",
+    bg: "bg-green-50",
+    iconBg: "bg-green-100",
+    accent: "text-green-700",
   },
   {
-    name: "Fruits & Vegetables",
-    image: "https://cdn-icons-png.flaticon.com/512/2153/2153788.png",
+    icon: "🎁",
+    name: "Gift Hampers",
+    desc: "Combos · up to 15% off",
+    href: "/gift-hampers",
+    bg: "bg-rose-50",
+    iconBg: "bg-rose-100",
+    accent: "text-rose-700",
   },
   {
-    name: "Cold Drinks & Juices",
-    image: "https://cdn-icons-png.flaticon.com/512/2405/2405479.png",
+    icon: "🧒",
+    name: "Kids Snacks",
+    desc: "Caramel · Choco · Cheese",
+    href: "/category/makhana-paper-box",
+    bg: "bg-yellow-50",
+    iconBg: "bg-yellow-100",
+    accent: "text-yellow-700",
   },
   {
-    name: "Snacks & Munchies",
-    image: "https://cdn-icons-png.flaticon.com/512/1046/1046784.png",
+    icon: "🥗",
+    name: "Healthy Chips",
+    desc: "Beetroot · Oats · Quinoa",
+    href: "/category/healthy-chips",
+    bg: "bg-orange-50",
+    iconBg: "bg-orange-100",
+    accent: "text-orange-700",
   },
   {
-    name: "Breakfast & Instant Food",
-    image: "https://cdn-icons-png.flaticon.com/512/3075/3075977.png",
+    icon: "🌾",
+    name: "Ragi Snacks",
+    desc: "Choco sticks · 30g & 50g",
+    href: "/category/ragi-snacks",
+    bg: "bg-purple-50",
+    iconBg: "bg-purple-100",
+    accent: "text-purple-700",
   },
   {
-    name: "Sweet Tooth",
-    image: "https://cdn-icons-png.flaticon.com/512/3081/3081559.png",
+    icon: "🍃",
+    name: "Raw Makhana",
+    desc: "Premium · ₹199 / 50g",
+    href: "/category/raw-makhana",
+    bg: "bg-teal-50",
+    iconBg: "bg-teal-100",
+    accent: "text-teal-700",
   },
   {
-    name: "Bakery & Biscuits",
-    image: "https://cdn-icons-png.flaticon.com/512/1046/1046759.png",
-  },
-  {
-    name: "Tea, Coffee & Milk Drinks",
-    image: "https://cdn-icons-png.flaticon.com/512/2935/2935307.png",
-  },
-  {
-    name: "Atta, Rice & Dal",
-    image: "https://cdn-icons-png.flaticon.com/512/1046/1046786.png",
-  },
-  {
-    name: "Masala, Oil & More",
-    image: "https://cdn-icons-png.flaticon.com/512/1046/1046769.png",
-  },
-  {
-    name: "Sauces & Spreads",
-    image: "https://cdn-icons-png.flaticon.com/512/1046/1046776.png",
-  },
-  {
-    name: "Chicken, Meat & Fish",
-    image: "https://cdn-icons-png.flaticon.com/512/1046/1046775.png",
-  },
-  {
-    name: "Organic & Healthy Living",
-    image: "https://cdn-icons-png.flaticon.com/512/2909/2909767.png",
-  },
-  {
-    name: "Baby Care",
-    image: "https://cdn-icons-png.flaticon.com/512/2922/2922510.png",
-  },
-  {
-    name: "Pharma & Wellness",
-    image: "https://cdn-icons-png.flaticon.com/512/2966/2966481.png",
-  },
-  {
-    name: "Cleaning Essentials",
-    image: "https://cdn-icons-png.flaticon.com/512/2920/2920262.png",
-  },
-  {
-    name: "Home & Office",
-    image: "https://cdn-icons-png.flaticon.com/512/1946/1946488.png",
-  },
-  {
-    name: "Personal Care",
-    image: "https://cdn-icons-png.flaticon.com/512/2965/2965567.png",
-  },
-  {
-    name: "Pet Care",
-    image: "https://cdn-icons-png.flaticon.com/512/616/616408.png",
+    icon: "⭐",
+    name: "Best Sellers",
+    desc: "Most loved picks",
+    href: "/products",
+    bg: "bg-amber-50",
+    iconBg: "bg-amber-100",
+    accent: "text-amber-700",
   },
 ]
 
 const AllCategorySection = () => {
-  return (
-    <section className="bg-gradient-to-b from-orange-50 to-white py-10">
+  const navigate = useNavigate()
 
+  return (
+    <section className="bg-gray-50 py-10 border-y border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div
-          className="
-          grid
-          grid-cols-3
-          sm:grid-cols-4
-          md:grid-cols-6
-          lg:grid-cols-8
-          xl:grid-cols-10
-          gap-6
-          "
-        >
-          {categories.map((category, index) => (
-            <div
-              key={index}
-              className="
-              flex
-              flex-col
-              items-center
-              text-center
-              group
-              cursor-pointer
-              "
+        <p className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 text-center mb-6">
+          Quick Browse
+        </p>
+
+        <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-8 gap-3 sm:gap-4">
+          {ranges.map((r) => (
+            <button
+              key={r.name}
+              onClick={() => navigate(r.href)}
+              className={`flex flex-col items-center text-center p-3 rounded-2xl ${r.bg} hover:shadow-md transition-all duration-300 group`}
             >
-
-              {/* Image Box */}
-              <div
-                className="
-                w-20
-                h-20
-                bg-white
-                rounded-xl
-                flex
-                items-center
-                justify-center
-                shadow-sm
-                transition
-                duration-300
-                group-hover:shadow-md
-                group-hover:scale-105
-                "
-              >
-                <img
-                  src={category.image}
-                  alt={category.name}
-                  className="w-12 h-12 object-contain"
-                />
+              <div className={`w-12 h-12 ${r.iconBg} rounded-xl flex items-center justify-center text-2xl mb-2 group-hover:scale-110 transition-transform duration-300`}>
+                {r.icon}
               </div>
-
-              {/* Category Name */}
-              <p
-                className="
-                mt-2
-                text-xs
-                sm:text-sm
-                font-medium
-                text-gray-700
-                "
-              >
-                {category.name}
-              </p>
-
-            </div>
+              <p className={`text-xs font-bold ${r.accent} leading-tight`}>{r.name}</p>
+              <p className="text-[10px] text-gray-400 mt-0.5 leading-tight">{r.desc}</p>
+            </button>
           ))}
         </div>
 
       </div>
-
     </section>
   )
 }
