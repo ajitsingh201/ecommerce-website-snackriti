@@ -1,6 +1,4 @@
 import { useNavigate } from "react-router-dom"
-import { useDispatch } from "react-redux"
-import { addToCart } from "../../store/cartSlice"
 import { products } from "../../data/products"
 import ProductCard from "../../components/product/ProductCard"
 
@@ -27,7 +25,6 @@ const STATS = [
 
 const PaperBoxPage = () => {
   const navigate = useNavigate()
-  const dispatch = useDispatch()
 
   return (
     <div className="min-h-screen bg-white">
