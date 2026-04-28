@@ -15,21 +15,21 @@ const slides = [
     highlight: "Snacking",
     description:
       "Experience the goodness of fox nuts transformed into crunchy, flavorful snacks that fuel your day without compromising your health goals.",
-    image: "/images/slider2.jpeg",
+    image: "/images/slider2.png",
   },
   {
     title: "Roast. Crunch. Repeat.",
     highlight: "Crunch",
     description:
       "Snackriti brings you perfectly roasted makhana packed with taste, protein, and lightness — the smarter alternative to fried snacks.",
-    image: "/images/slider3.jpeg",
+    image: "/images/slider3.png",
   },
   {
     title: "Flavors That Fit Your Lifestyle",
     highlight: "Lifestyle",
     description:
       "From classic Himalayan Pink Salt to spicy Peri Peri and indulgent Chocolate Crunch, explore a world of makhana flavors made for every mood.",
-    image: "/images/slider2.jpeg",
+    image: "/images/slider2.png",
   },
 ]
 

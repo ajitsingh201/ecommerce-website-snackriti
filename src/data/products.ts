@@ -960,7 +960,7 @@ export const products: Product[] = [
     description: "Pure, natural nutrition with carefully selected premium-grade lotus seeds. Unroasted and unseasoned — perfect for home roasting, cooking, or adding to your favorite healthy recipes. Naturally low in fat and rich in protein, fiber, and essential minerals.",
     highlights: ["Pure Raw Makhana — no additives", "Premium quality & handpicked", "Rich in protein & fiber", "Ideal for cooking, roasting & fasting"],
     ingredients: "100% Pure Raw Lotus Seeds (Makhana).",
-    keywords: ["raw makhana", "lotus seeds", "fox nuts", "premium", "natural", "fasting"],
+    keywords: ["raw makhana", "lotus seeds", "phool makhana", "fox nuts", "premium", "natural", "fasting"],
     rating: 4.7,
     reviewCount: 356,
     inStock: true,
